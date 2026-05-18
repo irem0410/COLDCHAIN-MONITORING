@@ -1,0 +1,642 @@
+file 7146281 1778518679                                         
+version 3
+run General-1-20260511-19:57:44-532294
+attr configname General
+attr datetime 20260511-19:57:44
+attr datetimef 20260511-195744
+attr experiment General
+attr inifile coldchain.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network ColdChainNetwork
+attr processid 532294
+attr repetition 1
+attr replication #1
+attr resultdir results
+attr runnumber 1
+attr seedset 1
+config image-path ../../inet4.4/images
+config num-rngs 2
+config network ColdChainNetwork
+config sim-time-limit 1h
+config repeat 10
+config seed-set 1
+config ned-path ..:../ned:../../inet4.4/src:../../flora/src
+config **.mobility.typename StationaryMobility
+config **.initFromDisplayString false
+config **.antenna.mobility.initialX 0m
+config **.antenna.mobility.initialY 0m
+config **.antenna.mobility.initialZ 0m
+config *.gateway.mobility.initialX 250m
+config *.gateway.mobility.initialY 250m
+config *.gateway.mobility.initialZ 0m
+config *.server.mobility.initialX 400m
+config *.server.mobility.initialY 250m
+config *.server.mobility.initialZ 0m
+config *.sensor[*].mobility.initialX "uniform(100m, 200m)"
+config *.sensor[*].mobility.initialY "uniform(100m, 300m)"
+config *.sensor[*].mobility.initialZ 0m
+config *.gateway.packetForwarder.queueMaxPackets 10
+config **.gateway.packetForwarder.queueLength.result-recording-modes +vector
+config *.radioMedium.analogModel.ignoreInterference false
+config *.radioMedium.backgroundNoise.power -110dBm
+config *.radioMedium.typename LoRaMedium
+config **.maxTransmissionDuration 1000s
+config **.energyStorage.typename IdealEpEnergyStorage
+config **.energyConsumer.typename LoRaEnergyConsumer
+config **.energyConsumer.configFile "xmldoc(\"energyConfig.xml\")"
+config *.gateway.LoRaGWNic.radio.energyConsumer.energySourceModule "\"ColdChainNetwork.gateway.energyStorage\""
+config *.gateway.LoRaGWNic.energySourceModule "\"ColdChainNetwork.gateway.energyStorage\""
+config *.sensor[*].LoRaNic.radio.energyConsumer.energySourceModule "\"ColdChainNetwork.sensor[index].energyStorage\""
+config *.sensor[*].LoRaNic.energySourceModule "\"ColdChainNetwork.sensor[index].energyStorage\""
+config **.energyStorage.nominalCapacity 1000J
+config **.energyStorage.initialCapacity 1000J
+config *.sensor[*].numApps 1
+config *.sensor[*].app[0].typename ColdChainApp
+config *.sensor[*].app[0].destAddresses "\"gateway\""
+config *.sensor[*].app[0].destPort 4000
+config *.sensor[*].app[0].timeToNextPacket 20s
+config *.sensor[*].app[0].tempMean 0
+config *.sensor[*].app[0].tempStdDev 3
+config *.sensor[*].app[0].tempThreshold 8
+config **.sensor[*].app[0].humMean 40
+config **.sensor[*].app[0].humStdDev 3
+config **.sensor[*].app[0].humThreshold 55
+config **.sensor[*].app[0].failureRate 0.05
+config **.transmitter.spreadingFactor 12
+config **.transmitter.power 14dBm
+config *.gateway.numApps 1
+config *.gateway.app[0].typename PacketForwarder
+config *.gateway.packetForwarder.localPort 4000
+config *.gateway.packetForwarder.destPort 5000
+config *.gateway.packetForwarder.destAddresses "\"server\""
+config *.server.numApps 1
+config *.server.app[0].typename NetworkServerApp
+config *.server.app[0].localPort 5000
+config output-vector-file results/General-1.vec
+config output-scalar-file results/General-1.sca
+config cmdenv-express-mode false
+config cmdenv-log-prefix "[%l] %m: "
+config **.temperature.result-recording-modes +vector,+mean
+config **.packetDelivery.result-recording-modes +count
+
+vector 0 ColdChainNetwork.gateway.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 1 ColdChainNetwork.gateway.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 2 ColdChainNetwork.gateway.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 3 ColdChainNetwork.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 4 ColdChainNetwork.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 5 ColdChainNetwork.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 6 ColdChainNetwork.gateway.energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 7 ColdChainNetwork.sensor[0].energyStorage powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 8 ColdChainNetwork.gateway.LoRaGWNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 9 ColdChainNetwork.gateway.LoRaGWNic.radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 10 ColdChainNetwork.sensor[0].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 11 ColdChainNetwork.sensor[0].LoRaNic.radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 12 ColdChainNetwork.sensor[1].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 13 ColdChainNetwork.sensor[1].LoRaNic.radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 14 ColdChainNetwork.sensor[2].LoRaNic.radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source radioModeChanged
+attr title "Radio mode"
+vector 15 ColdChainNetwork.sensor[2].LoRaNic.radio.energyConsumer powerConsumption:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source powerConsumptionChanged
+attr title "Power consumption"
+vector 16 ColdChainNetwork.gateway.LoRaGWNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 17 ColdChainNetwork.gateway.LoRaGWNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 18 ColdChainNetwork.sensor[0].app[0] explicitAlarms:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source alarmSignal
+attr title "Total Alarms Triggered"
+vector 19 ColdChainNetwork.sensor[0].app[0] temperature:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source temperatureSignal
+attr title "Measured Temperature"
+vector 20 ColdChainNetwork.sensor[0].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 21 ColdChainNetwork.sensor[0].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 22 ColdChainNetwork.sensor[0].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 23 ColdChainNetwork.sensor[0].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 24 ColdChainNetwork.sensor[0].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 25 ColdChainNetwork.sensor[0].energyStorage residualEnergyCapacity:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source residualEnergyCapacityChanged
+attr title "Residual energy capacity"
+vector 26 ColdChainNetwork.sensor[0].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 27 ColdChainNetwork.sensor[0].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 28 ColdChainNetwork.sensor[0].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 29 ColdChainNetwork.gateway.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 30 ColdChainNetwork.gateway.ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpRequestSent
+attr title "ARP request sent, packetBytes"
+vector 31 ColdChainNetwork.gateway.ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 32 ColdChainNetwork.gateway.eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 33 ColdChainNetwork.gateway.eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 34 ColdChainNetwork.gateway.eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 35 ColdChainNetwork.gateway.eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 36 ColdChainNetwork.gateway.eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 37 ColdChainNetwork.gateway.eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 38 ColdChainNetwork.gateway.eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 39 ColdChainNetwork.gateway.eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 40 ColdChainNetwork.gateway.eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 41 ColdChainNetwork.server.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 42 ColdChainNetwork.server.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 43 ColdChainNetwork.server.ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 44 ColdChainNetwork.server.ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr recordingmode vector(packetBytes)
+attr source arpReplySent
+attr title "ARP replies sent, packetBytes"
+vector 45 ColdChainNetwork.server.ethernet encapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source encapPk
+attr title "packets encapsulated, packetBytes"
+vector 46 ColdChainNetwork.server.eth[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 47 ColdChainNetwork.server.eth[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 48 ColdChainNetwork.server.eth[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 49 ColdChainNetwork.server.eth[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 50 ColdChainNetwork.server.eth[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 51 ColdChainNetwork.server.eth[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packet bytes from higher layer, packetBytes"
+vector 52 ColdChainNetwork.server.eth[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 53 ColdChainNetwork.server.eth[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 54 ColdChainNetwork.server.eth[0].mac txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 55 ColdChainNetwork.gateway.eth[0].mac rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 56 ColdChainNetwork.gateway.eth[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 57 ColdChainNetwork.gateway.ethernet decapPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source decapPk
+attr title "packets decapsulated, packetBytes"
+vector 58 ColdChainNetwork.server.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 59 ColdChainNetwork.server.app[0] "Vector of SNIR per node" ETV
+vector 60 ColdChainNetwork.server.app[0] "Vector of RSSI per node" ETV
+vector 61 ColdChainNetwork.sensor[0].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 62 ColdChainNetwork.sensor[2].app[0] explicitAlarms:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source alarmSignal
+attr title "Total Alarms Triggered"
+vector 63 ColdChainNetwork.sensor[2].app[0] temperature:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source temperatureSignal
+attr title "Measured Temperature"
+vector 64 ColdChainNetwork.sensor[2].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 65 ColdChainNetwork.sensor[2].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 66 ColdChainNetwork.sensor[2].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 67 ColdChainNetwork.sensor[2].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 68 ColdChainNetwork.sensor[2].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 69 ColdChainNetwork.sensor[2].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 70 ColdChainNetwork.sensor[2].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 71 ColdChainNetwork.sensor[2].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 72 ColdChainNetwork.server.app[0] "Vector of SNIR per node" ETV
+vector 73 ColdChainNetwork.server.app[0] "Vector of RSSI per node" ETV
+vector 74 ColdChainNetwork.sensor[2].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 75 ColdChainNetwork.sensor[1].app[0] explicitAlarms:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source alarmSignal
+attr title "Total Alarms Triggered"
+vector 76 ColdChainNetwork.sensor[1].app[0] temperature:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source temperatureSignal
+attr title "Measured Temperature"
+vector 77 ColdChainNetwork.sensor[1].LoRaNic.queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 78 ColdChainNetwork.sensor[1].LoRaNic.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 79 ColdChainNetwork.sensor[1].LoRaNic.queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 80 ColdChainNetwork.sensor[1].LoRaNic.queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 81 ColdChainNetwork.sensor[1].LoRaNic.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 82 ColdChainNetwork.sensor[1].LoRaNic.radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "Radio transmission state"
+vector 83 ColdChainNetwork.sensor[1].LoRaNic.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 84 ColdChainNetwork.sensor[1].LoRaNic.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 85 ColdChainNetwork.sensor[1].LoRaNic.radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source receptionStateChanged
+attr title "Radio reception state"
+vector 86 ColdChainNetwork.server.app[0] "Vector of SNIR per node" ETV
+vector 87 ColdChainNetwork.server.app[0] "Vector of RSSI per node" ETV
+33	23060 544354 18 12714 0.1 3276.8 32768 0 9360 2200960 13431462400
+36	567414 544354 18 12714 0.1 3276.8 32768 0 9360 2200960 13431462400
+21	1111768 543726 4 12730 0.1 3276.8 32768 0 640 185600 118784000
+24	1655494 543726 4 12730 0.1 3276.8 32768 0 640 185600 118784000
+65	2199220 543849 76 12736 0.1 3276.8 32768 0 640 67200 43008000
+68	2743069 543849 76 12736 0.1 3276.8 32768 0 640 67200 43008000
+78	3286918 544171 170 12882 0.1 3276.8 32768 0 640 36480 23347200
+81	3831089 544171 170 12882 0.1 3276.8 32768 0 640 36480 23347200
+47	4375260 544426 24 13084 0.1 3276.8 32768 0 3680 99360 365644800
+50	4919686 544426 24 13084 0.1 3276.8 32768 0 3680 99360 365644800
+59	5464112 26 38 38 12.713705945708 12.713705945708 1 137 137 137 18769
+60	5464138 24 38 38 12.713705945708 12.713705945708 1 0 0 0 0
+72	5464162 26 96 96 32.435669328098 32.435669328098 1 137 137 137 18769
+73	5464188 24 96 96 32.435669328098 32.435669328098 1 0 0 0 0
+86	5464212 28 415 415 116.190340334562 116.190340334562 1 137 137 137 18769
+87	5464240 26 415 415 116.190340334562 116.190340334562 1 0 0 0 0
+0	5464266 8 0 0 0 0 1 0 0 0 0
+1	5464274 8 0 0 0 0 1 0 0 0 0
+2	5464282 8 0 0 0 0 1 0 0 0 0
+3	5464290 11453 0 13907 0 3599.550528309368 404 0 403 81406 21898214
+4	5475743 8 0 0 0 0 1 0 0 0 0
+5	5475751 8 0 0 0 0 1 0 0 0 0
+6	5475759 66 0 0 0 0 6 0 3.3e-07 9.9e-07 3.267e-13
+7	5475825 246117 0 13893 0 3599.550465059368 8493 0 0.09603 116.58042 4.4571844349997
+8	5721942 24 0 0 0 0 3 0 4 4 16
+9	5721966 58 0 0 0 0 5 0 3.3e-07 9.9e-07 3.267e-13
+10	5722024 54448 0 13886 0 3597.644239835144 1971 0 3 3271 6511
+11	5776472 155583 0 13886 0 3597.644239835144 5331 0 0.03201 43.98174 1.4078554974
+12	5932055 11281 0 13763 0 3563.382109621422 408 0 3 670 1322
+13	5943336 32995 0 13763 0 3563.382109621422 1124 0 0.03201 9.7310399999999 0.3114905904
+14	5976331 20466 0 13893 0 3599.550465059368 741 0 3 1224 2426
+15	5996797 59537 0 13893 0 3599.550465059368 2035 0 0.03201 17.22138 0.5512563738
+16	6056334 9 0 0 0 0 1 1 1 1 1
+17	6056343 9 0 0 0 0 1 1 1 1 1
+18	6056352 8793 3 13858 11.296311395708 3592.227023835144 318 0 1 3 3
+19	6065145 13456 3 13858 11.296311395708 3592.227023835144 318 -8.237254784556 8.9283358836701 19.996796411606 3070.8454222197
+20	6078601 9111 4 13859 11.296311395708 3592.227023835144 318 64 64 20352 1302528
+21	6087712 57584 12730 13911 3276.9 3600 3232 0 640 17920 11468800
+22	6145296 8793 4 13859 11.296311395708 3592.227023835144 318 0 0 0 0
+23	6154089 9111 4 13859 11.296311395708 3592.227023835144 318 64 64 20352 1302528
+24	6163200 57584 12730 13911 3276.9 3600 3232 0 640 17920 11468800
+25	6220784 122893 4 13893 11.296311395708 3599.550465059368 2886 -33.60775793915 0 -48567.638509883 1087104.0564342
+26	6343677 35174 4 13864 11.296311395708 3593.644239835144 1272 0 2 1272 1908
+27	6378851 8793 4 13859 11.296311395708 3592.227023835144 318 0 0 0 0
+28	6387644 8793 4 13859 11.296311395708 3592.227023835144 318 0 0 0 0
+29	6396437 11552 15 13899 12.713527395708 3599.550465059368 403 33 33 13299 438867
+30	6407989 830 16 13578 12.713527395708 3506.495294825074 29 28 28 812 22736
+31	6408819 12382 17 13901 12.713527395708 3599.550465059368 432 28 53 22171 1154763
+32	6421201 12814 18 13902 12.713527395708 3599.550465059368 432 368 568 239576 133944768
+33	6434015 57627 12714 13911 3276.9 3600 3232 0 9360 194800 1175353600
+34	6491642 11950 18 13902 12.713527395708 3599.550465059368 432 0 0 0 0
+35	6503592 12814 18 13902 12.713527395708 3599.550465059368 432 368 568 239576 133944768
+36	6516406 57627 12714 13911 3276.9 3600 3232 0 9360 194800 1175353600
+37	6574033 12382 18 13902 12.713527395708 3599.550465059368 432 46 71 29947 2092887
+38	6586415 11950 18 13902 12.713527395708 3599.550465059368 432 0 0 0 0
+39	6598365 11950 18 13902 12.713527395708 3599.550465059368 432 0 0 0 0
+40	6610315 12382 19 13903 12.713584995708 3599.550528259368 432 64 71 30469 2150307
+41	6622697 12383 20 13904 12.713585045708 3599.550528309368 432 64 71 30469 2150307
+42	6635080 12383 20 13904 12.713585045708 3599.550528309368 432 64 71 30469 2150307
+43	6647463 12383 21 13905 12.713585045708 3599.550528309368 432 46 53 22693 1193391
+44	6659846 830 22 13584 12.713585045708 3506.495352475074 29 28 28 812 22736
+45	6660676 830 23 13585 12.713585045708 3506.495352475074 29 28 28 812 22736
+46	6661506 859 24 13586 12.713585045708 3506.495352475074 29 368 368 10672 3927296
+47	6662365 57534 13084 13911 3276.9 3600 3232 0 3680 7360 27084800
+48	6719899 801 24 13586 12.713585045708 3506.495352475074 29 0 0 0 0
+49	6720700 859 24 13586 12.713585045708 3506.495352475074 29 368 368 10672 3927296
+50	6721559 57534 13084 13911 3276.9 3600 3232 0 3680 7360 27084800
+51	6779093 830 24 13586 12.713585045708 3506.495352475074 29 46 46 1334 61364
+52	6779923 801 24 13586 12.713585045708 3506.495352475074 29 0 0 0 0
+53	6780724 801 24 13586 12.713585045708 3506.495352475074 29 0 0 0 0
+54	6781525 830 26 13588 12.713642645708 3506.495410075074 29 64 64 1856 118784
+55	6782355 830 27 13589 12.713642695708 3506.495410125074 29 64 64 1856 118784
+56	6783185 830 27 13589 12.713642695708 3506.495410125074 29 64 64 1856 118784
+57	6784015 830 28 13590 12.713642695708 3506.495410125074 29 46 46 1334 61364
+58	6784845 11553 37 13907 12.713705945708 3599.550528309368 403 33 33 13299 438867
+61	6796398 38482 40 13886 13.713527395708 3597.644239835144 1392 0 3 786 966
+62	6834880 3212 75 13887 31.018390078098 3598.133249059368 116 0 1 1 1
+63	6838092 4907 75 13887 31.018390078098 3598.133249059368 116 -6.6777329247129 9.0852461583961 50.424479141752 994.54600131202
+64	6842999 3328 76 13888 31.018390078098 3598.133249059368 116 64 64 7424 475136
+65	6846327 57550 12736 13911 3276.9 3600 3232 0 640 7040 4505600
+66	6903877 3212 76 13888 31.018390078098 3598.133249059368 116 0 0 0 0
+67	6907089 3328 76 13888 31.018390078098 3598.133249059368 116 64 64 7424 475136
+68	6910417 57550 12736 13911 3276.9 3600 3232 0 640 7040 4505600
+69	6967967 12848 76 13893 31.018390078098 3599.550465059368 464 0 2 464 696
+70	6980815 3212 76 13888 31.018390078098 3598.133249059368 116 0 0 0 0
+71	6984027 3212 76 13888 31.018390078098 3598.133249059368 116 0 0 0 0
+74	6987239 15293 98 13820 33.435606078098 3572.53207498127 552 0 3 345 483
+75	7002532 1725 169 13735 57.386530542281 3557.964893621422 62 0 0 0 0
+76	7004257 2640 169 13735 57.386530542281 3557.964893621422 62 -5.1565705181939 4.4433237702229 -25.772903245915 420.20401465547
+77	7006897 1787 170 13736 57.386530542281 3557.964893621422 62 64 64 3968 253952
+78	7008684 57538 12882 13911 3276.9 3600 3232 0 640 3200 2048000
+79	7066222 1725 170 13736 57.386530542281 3557.964893621422 62 0 0 0 0
+80	7067947 1787 170 13736 57.386530542281 3557.964893621422 62 64 64 3968 253952
+81	7069734 57538 12882 13911 3276.9 3600 3232 0 640 3200 2048000
+82	7127272 6900 170 13747 57.386530542281 3559.382109621422 248 0 2 248 372
+83	7134172 1725 170 13736 57.386530542281 3557.964893621422 62 0 0 0 0
+84	7135897 1725 170 13736 57.386530542281 3557.964893621422 62 0 0 0 0
+85	7137622 8658 184 13763 59.803746542281 3563.382109621422 312 0 3 204 300
+

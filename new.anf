@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<analysis version="2">
+    <inputs>
+        <input pattern="General-0.sca"/>
+        <input pattern="General-0.vec"/>
+        <input pattern="General-1.sca"/>
+        <input pattern="General-1.vec"/>
+        <input pattern="General-2.sca"/>
+        <input pattern="General-2.vec"/>
+        <input pattern="General-3.sca"/>
+        <input pattern="General-3.vec"/>
+        <input pattern="General-4.sca"/>
+        <input pattern="General-4.vec"/>
+        <input pattern="General-5.sca"/>
+        <input pattern="General-5.vec"/>
+        <input pattern="General-6.sca"/>
+        <input pattern="General-6.vec"/>
+        <input pattern="General-7.sca"/>
+        <input pattern="General-7.vec"/>
+        <input pattern="General-8.sca"/>
+        <input pattern="General-8.vec"/>
+        <input pattern="General-9.sca"/>
+        <input pattern="General-9.vec"/>
+    </inputs>
+    <charts/>
+</analysis>
